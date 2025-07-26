@@ -80,12 +80,11 @@ jobs:
             fi
           done
 
-      - name: Make test scripts executable
-        run: chmod +x packages/cli/__test_scripts__/*.bats packages/cli/__test_scripts__/*.sh
-
-      - name: Run production validation tests
-        run: ./run_all_bats.sh
-        working-directory: packages/cli/__test_scripts__
+      - name: Run CLI TypeScript tests
+        run: cross-env bun test tests/commands/
+        working-directory: packages/cli
+        env:
+          ELIZA_TEST_MODE: true
 
       - name: Report test results
         if: always()
