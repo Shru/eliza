@@ -40,7 +40,7 @@ jobs:
           elizaos --version
           bats --version
           # Verify npm create eliza works (create-eliza package should be available via npm create)
-          npm create eliza --help || echo "npm create eliza available"
+          npm create eliza --help && echo "npm create eliza available"
 
       - name: Clean eliza projects cache
         run: rm -rf ~/.eliza/projects
@@ -82,6 +82,10 @@ jobs:
 
       - name: Install cross-env globally
         run: bun install -g cross-env
+
+      - name: Install CLI dependencies
+        run: bun install
+        working-directory: packages/cli
 
       - name: Run CLI TypeScript tests
         run: cross-env bun test tests/commands/
