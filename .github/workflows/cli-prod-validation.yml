@@ -83,9 +83,15 @@ jobs:
       - name: Install cross-env globally
         run: bun install -g cross-env
 
-      - name: Install CLI dependencies
+      - name: Replace workspace dependencies with latest versions
+        run: sed -e 's/workspace:\*/latest/' -i package.json
+
+      - name: Install dependencies
         run: bun install
-        working-directory: packages/cli
+
+      - name: Build all packages
+        run: bun run build
+
 
       - name: Run CLI TypeScript tests
         run: cross-env bun test tests/commands/
