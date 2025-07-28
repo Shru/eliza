@@ -89,10 +89,6 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Build all packages
-        run: bun run build
-
-
       - name: Run CLI TypeScript tests
         run: cross-env bun test tests/commands/
         working-directory: packages/cli
