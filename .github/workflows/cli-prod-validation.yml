@@ -84,7 +84,7 @@ jobs:
         run: bun install -g cross-env
 
       - name: Replace workspace dependencies with latest versions
-        run: sed -e 's/workspace:\*/latest/' -i package.json
+        run: sed -e 's/workspace:\*/latest/g' -i package.json
 
       - name: Install dependencies
         run: bun install
