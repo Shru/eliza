@@ -8,11 +8,15 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Sync fork
-        uses: repo-sync/fork-sync@v2
-        with:
-          upstream_repository: 'elizaOS/eliza'
-          upstream_branch: 'develop'
-          target_branch: 'develop'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout target repo
+      uses: actions/checkout@v3
+
+    - name: Sync upstream changes
+      uses: aormsby/Fork-Sync-With-Upstream-action@v3
+      with:
+        target_sync_branch: develop
+        target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+        upstream_sync_repo: elizaOS/eliza
+        upstream_sync_branch: develop
